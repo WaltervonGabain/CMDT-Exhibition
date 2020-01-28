@@ -11,21 +11,21 @@ boolean touchStates[12];          //to keep track of the previous touch states
 
 void setup() 
 {
+  mySerial.begin(9600);
+  myMP3.begin(mySerial);
+  myMP3.volume(20); // Volume at 77%
+  
   Serial.begin(9600);
-
   pinMode(irqpin, INPUT);
   digitalWrite(irqpin, HIGH); //enable pullup resistor
-
   Wire.begin();
   mpr121_setup();
-
-  myMP3.begin();
-  myMP3.volume(20); // Volume at 77%
 }
 
 void loop() 
 {
   readTouchInputs();
+  //myMP3.wakeUp();
 }
 
 void readTouchInputs()
@@ -54,27 +54,31 @@ void readTouchInputs()
           switch (i) 
           {
             case 1: 
+            Serial.println("paw 1 was just touched");
             myMP3.play(1);
             delay(30000);
-            myMP3.reset();
+            myMP3.sleep();
             break;
             
             case 4: 
+            Serial.println("paw 2 just touched");
             myMP3.play(2);
             delay(30000);
-            myMP3.reset();
+            myMP3.sleep();
             break;
             
             case 8: 
+            Serial.println("paw 3 was just touched");
             myMP3.play(3);
-            delay(30000);
-            myMP3.reset();
+            delay(10000);
+            myMP3.sleep();
             break;
             
             case 10:
+            Serial.println("paw 4 was just touched");
             myMP3.play(4);
-            delay(30000);
-            myMP3.reset();
+            delay(10000);
+            myMP3.sleep();
             break;
           }
           
