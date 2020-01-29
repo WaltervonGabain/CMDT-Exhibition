@@ -1,3 +1,11 @@
+/* 
+ * Arduino code voor mijn project CMT Oude Dag Compagnon 
+ * Bestaande uit:
+ * Arduino Uno 
+ * MPR121 + Conductive thread op electrodes 1, 4, 8 & 10
+ * DFPlayer mini + speaker en SD kaart met 4 MP3 files
+ */
+ 
 #include <SoftwareSerial.h>
 #include <DFPlayerMini_Fast.h>
 #include "mpr121.h"
@@ -51,34 +59,27 @@ void readTouchInputs()
           Serial.print(i);
           Serial.println(" was just touched");
 
+          // Switch statement for 4 paws telling the MP3 player to play 001.mp3 to 004.mp3 from the SD card
           switch (i) 
           {
             case 1: 
             Serial.println("paw 1 was just touched");
             myMP3.play(1);
-            delay(30000);
-            myMP3.sleep();
             break;
             
             case 4: 
             Serial.println("paw 2 just touched");
             myMP3.play(2);
-            delay(30000);
-            myMP3.sleep();
             break;
             
             case 8: 
             Serial.println("paw 3 was just touched");
             myMP3.play(3);
-            delay(10000);
-            myMP3.sleep();
             break;
             
             case 10:
             Serial.println("paw 4 was just touched");
             myMP3.play(4);
-            delay(10000);
-            myMP3.sleep();
             break;
           }
           
